@@ -1,3 +1,6 @@
+using System.IO;
+using System.Xml.Linq;
+
 namespace XML_explorer
 {
     public partial class Form1 : Form
@@ -8,16 +11,6 @@ namespace XML_explorer
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolTip1_Popup(object sender, PopupEventArgs e)
-        {
-
-        }
-
-        private void toolStripContainer1_ContentPanel_Load(object sender, EventArgs e)
         {
 
         }
@@ -36,8 +29,26 @@ namespace XML_explorer
 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                string filePath = ofd.FileName;
-                MessageBox.Show($"Selected file: {filePath}");
+                string filename = ofd.SafeFileName;
+                string filepath = ofd.FileName;
+                XDocument doc = XDocument.Load(filepath);
+
+                //add a root
+                TreeNode rootNode = new TreeNode(doc.Root?.Name.LocalName);
+                filesTreeView.Nodes.Add(rootNode);
+                AddXmlNodes(doc.Root, rootNode);
+                filesTreeView.ExpandAll();
+
+                int maxDepth = GetMaxDepth(doc.Root);
+                int maxChildren = doc.Descendants().Select(x => x.Elements().Count()).DefaultIfEmpty(0).Max();
+                int minAttrs = doc.Descendants().Select(x => x.Attributes().Count()).DefaultIfEmpty(0).Min();
+                int maxAttrs = doc.Descendants().Select(x => x.Attributes().Count()).DefaultIfEmpty(0).Max();
+
+                lblFilename.Text = $"Název souboru: {filename}";
+                lblMaxDepth.Text = $"Maximální hloubka: {maxDepth}";
+                lblChildren.Text = $"Maximální poèet pøímých potomkù: {maxChildren}";
+                lblMinAttrs.Text = $"Minimální poèet atributù: {minAttrs}";
+                lblMaxAttrs.Text = $"Maximální poèet atributù: {maxAttrs}";
             }
         }
 
@@ -49,6 +60,30 @@ namespace XML_explorer
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
             //close
+            //clear the tree view
+            filesTreeView.Nodes.Clear();
+        }
+
+        private void AddXmlNodes(XElement element, TreeNode tn)
+        {
+            foreach (var child in element.Elements())
+            {
+                TreeNode childNode = new TreeNode(child.Name.LocalName);
+                tn.Nodes.Add(childNode);
+                AddXmlNodes(child, childNode);
+            }
+        }
+
+        private int GetMaxDepth(XElement element)
+        {
+            if (!element.Elements().Any())
+                return 1;
+            return 1 + element.Elements().Max(e => GetMaxDepth(e));
+        }
+
+        private void lblMaxDepth_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

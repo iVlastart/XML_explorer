@@ -33,6 +33,12 @@
             toolStripButton1 = new ToolStripButton();
             toolStripButton2 = new ToolStripButton();
             toolStripButton3 = new ToolStripButton();
+            filesTreeView = new TreeView();
+            lblFilename = new Label();
+            lblMaxDepth = new Label();
+            lblChildren = new Label();
+            lblMinAttrs = new Label();
+            lblMaxAttrs = new Label();
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -77,11 +83,65 @@
             toolStripButton3.ToolTipText = "Zavřít";
             toolStripButton3.Click += toolStripButton3_Click;
             // 
+            // filesTreeView
+            // 
+            filesTreeView.Location = new Point(0, 30);
+            filesTreeView.Name = "filesTreeView";
+            filesTreeView.Size = new Size(184, 419);
+            filesTreeView.TabIndex = 1;
+            // 
+            // lblFilename
+            // 
+            lblFilename.AutoSize = true;
+            lblFilename.Location = new Point(236, 30);
+            lblFilename.Name = "lblFilename";
+            lblFilename.Size = new Size(0, 20);
+            lblFilename.TabIndex = 2;
+            // 
+            // lblMaxDepth
+            // 
+            lblMaxDepth.AutoSize = true;
+            lblMaxDepth.Location = new Point(236, 62);
+            lblMaxDepth.Name = "lblMaxDepth";
+            lblMaxDepth.Size = new Size(0, 20);
+            lblMaxDepth.TabIndex = 3;
+            lblMaxDepth.Click += lblMaxDepth_Click;
+            // 
+            // lblChildren
+            // 
+            lblChildren.AutoSize = true;
+            lblChildren.Location = new Point(236, 95);
+            lblChildren.Name = "lblChildren";
+            lblChildren.Size = new Size(0, 20);
+            lblChildren.TabIndex = 4;
+            // 
+            // lblMinAttrs
+            // 
+            lblMinAttrs.AutoSize = true;
+            lblMinAttrs.Location = new Point(236, 124);
+            lblMinAttrs.Name = "lblMinAttrs";
+            lblMinAttrs.Size = new Size(0, 20);
+            lblMinAttrs.TabIndex = 5;
+            // 
+            // lblMaxAttrs
+            // 
+            lblMaxAttrs.AutoSize = true;
+            lblMaxAttrs.Location = new Point(236, 153);
+            lblMaxAttrs.Name = "lblMaxAttrs";
+            lblMaxAttrs.Size = new Size(0, 20);
+            lblMaxAttrs.TabIndex = 6;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(lblMaxAttrs);
+            Controls.Add(lblMinAttrs);
+            Controls.Add(lblChildren);
+            Controls.Add(lblMaxDepth);
+            Controls.Add(lblFilename);
+            Controls.Add(filesTreeView);
             Controls.Add(toolStrip1);
             Name = "Form1";
             Text = "Form1";
@@ -98,5 +158,11 @@
         private ToolStripButton toolStripButton1;
         private ToolStripButton toolStripButton2;
         private ToolStripButton toolStripButton3;
+        private TreeView filesTreeView;
+        private Label lblFilename;
+        private Label lblMaxDepth;
+        private Label lblChildren;
+        private Label lblMinAttrs;
+        private Label lblMaxAttrs;
     }
 }
