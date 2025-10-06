@@ -33,7 +33,7 @@
             toolStripButton1 = new ToolStripButton();
             toolStripButton2 = new ToolStripButton();
             toolStripButton3 = new ToolStripButton();
-            filesTreeView = new TreeView();
+            elementsTreeView = new TreeView();
             lblFilename = new Label();
             lblMaxDepth = new Label();
             lblChildren = new Label();
@@ -83,12 +83,12 @@
             toolStripButton3.ToolTipText = "Zavřít";
             toolStripButton3.Click += toolStripButton3_Click;
             // 
-            // filesTreeView
+            // elementsTreeView
             // 
-            filesTreeView.Location = new Point(0, 30);
-            filesTreeView.Name = "filesTreeView";
-            filesTreeView.Size = new Size(184, 419);
-            filesTreeView.TabIndex = 1;
+            elementsTreeView.Location = new Point(0, 30);
+            elementsTreeView.Name = "elementsTreeView";
+            elementsTreeView.Size = new Size(184, 419);
+            elementsTreeView.TabIndex = 1;
             // 
             // lblFilename
             // 
@@ -141,7 +141,7 @@
             Controls.Add(lblChildren);
             Controls.Add(lblMaxDepth);
             Controls.Add(lblFilename);
-            Controls.Add(filesTreeView);
+            Controls.Add(elementsTreeView);
             Controls.Add(toolStrip1);
             Name = "Form1";
             Text = "Form1";
@@ -158,7 +158,7 @@
         private ToolStripButton toolStripButton1;
         private ToolStripButton toolStripButton2;
         private ToolStripButton toolStripButton3;
-        private TreeView filesTreeView;
+        private TreeView elementsTreeView;
         private Label lblFilename;
         private Label lblMaxDepth;
         private Label lblChildren;

@@ -35,9 +35,9 @@ namespace XML_explorer
 
                 //add a root
                 TreeNode rootNode = new TreeNode(doc.Root?.Name.LocalName);
-                filesTreeView.Nodes.Add(rootNode);
+                elementsTreeView.Nodes.Add(rootNode);
                 AddXmlNodes(doc.Root, rootNode);
-                filesTreeView.ExpandAll();
+                elementsTreeView.ExpandAll();
 
                 int maxDepth = GetMaxDepth(doc.Root);
                 int maxChildren = doc.Descendants().Select(x => x.Elements().Count()).DefaultIfEmpty(0).Max();
@@ -60,8 +60,12 @@ namespace XML_explorer
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
             //close
-            //clear the tree view
-            filesTreeView.Nodes.Clear();
+            elementsTreeView.Nodes.Clear();
+            lblFilename.Text = "";
+            lblMaxDepth.Text = "";
+            lblChildren.Text = "";
+            lblMinAttrs.Text = "";
+            lblMaxAttrs.Text = "";
         }
 
         private void AddXmlNodes(XElement element, TreeNode tn)
