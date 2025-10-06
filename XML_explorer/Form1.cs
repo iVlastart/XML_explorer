@@ -1,5 +1,7 @@
+using System;
 using System.IO;
 using System.Xml.Linq;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace XML_explorer
 {
@@ -35,6 +37,7 @@ namespace XML_explorer
 
                 //add a root
                 TreeNode rootNode = new TreeNode(doc.Root?.Name.LocalName);
+                rootNode.Tag = doc.Root;
                 elementsTreeView.Nodes.Add(rootNode);
                 AddXmlNodes(doc.Root, rootNode);
                 elementsTreeView.ExpandAll();
@@ -73,6 +76,7 @@ namespace XML_explorer
             foreach (var child in element.Elements())
             {
                 TreeNode childNode = new TreeNode(child.Name.LocalName);
+                childNode.Tag = child;
                 tn.Nodes.Add(childNode);
                 AddXmlNodes(child, childNode);
             }
@@ -88,6 +92,50 @@ namespace XML_explorer
         private void lblMaxDepth_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void elementsTreeView_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            TreeNode tn = e.Node;
+            
+            if(tn.Tag is XElement element)
+            {
+                int depth = GetDepth(element);
+                int order = GetSiblingIndex(element);
+                string attrs = string.Join(Environment.NewLine, 
+                    element.Attributes().Select(a=>$"{a.Name}=\"{a.Value}\""));
+                string txt = "";
+                lblInfo.Text = $"Hloubka: {depth}\n" +
+                         $"Poøadí mezi sourozenci: {order}\n" +
+                         $"Atributy:\n{attrs}\n";
+                if(!element.HasElements && !string.IsNullOrWhiteSpace(element.Value))
+                {
+                    txt = element.Value;
+                    lblInfo.Text += $"Text: {txt}";
+                }
+                
+            }
+        }
+
+        private int GetDepth(XElement element)
+        {
+            int depth = 1;
+            XElement current = element;
+            while(current.Parent!=null)
+            {
+                depth++;
+                current = current.Parent;
+            }
+            return depth;
+        }
+
+        private int GetSiblingIndex(XElement element)
+        {
+            if (element.Parent == null)
+                return 1;
+
+            var siblings = element.Parent.Elements().ToList();
+            return siblings.IndexOf(element);
         }
     }
 }

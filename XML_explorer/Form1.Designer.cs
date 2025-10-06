@@ -39,6 +39,7 @@
             lblChildren = new Label();
             lblMinAttrs = new Label();
             lblMaxAttrs = new Label();
+            lblInfo = new Label();
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -89,6 +90,7 @@
             elementsTreeView.Name = "elementsTreeView";
             elementsTreeView.Size = new Size(184, 419);
             elementsTreeView.TabIndex = 1;
+            elementsTreeView.AfterSelect += elementsTreeView_AfterSelect;
             // 
             // lblFilename
             // 
@@ -131,11 +133,20 @@
             lblMaxAttrs.Size = new Size(0, 20);
             lblMaxAttrs.TabIndex = 6;
             // 
+            // lblInfo
+            // 
+            lblInfo.AutoSize = true;
+            lblInfo.Location = new Point(541, 95);
+            lblInfo.Name = "lblInfo";
+            lblInfo.Size = new Size(0, 20);
+            lblInfo.TabIndex = 7;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(lblInfo);
             Controls.Add(lblMaxAttrs);
             Controls.Add(lblMinAttrs);
             Controls.Add(lblChildren);
@@ -164,5 +175,6 @@
         private Label lblChildren;
         private Label lblMinAttrs;
         private Label lblMaxAttrs;
+        private Label lblInfo;
     }
 }
