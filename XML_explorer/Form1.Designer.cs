@@ -90,6 +90,7 @@
             elementsTreeView.Name = "elementsTreeView";
             elementsTreeView.Size = new Size(184, 419);
             elementsTreeView.TabIndex = 1;
+            elementsTreeView.AfterLabelEdit += elementsTreeView_AfterLabelEdit;
             elementsTreeView.AfterSelect += elementsTreeView_AfterSelect;
             // 
             // lblFilename
