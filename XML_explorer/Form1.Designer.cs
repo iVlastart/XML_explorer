@@ -155,9 +155,9 @@
             Controls.Add(lblFilename);
             Controls.Add(elementsTreeView);
             Controls.Add(toolStrip1);
+            FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Name = "Form1";
-            Text = "Form1";
-            Load += Form1_Load;
+            Text = "XML Editor";
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             ResumeLayout(false);
